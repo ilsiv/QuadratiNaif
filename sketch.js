@@ -4,9 +4,11 @@ let palette = [];
 
 let pal;
 
+let canvas;
+
 function setup() {
 
-  var canvas = createCanvas(600, 600);
+  canvas = createCanvas(600, 600);
   // var canvas = createCanvas(800, 600);
   // let q = new Quadrato(200, 200, 100, 144);
   // series.push(q);
@@ -15,13 +17,14 @@ function setup() {
     let s = new Serie(random(100, canvas.width - 100), random(100, canvas.height - 100), random(20, 45), pal);
     series.push(s);
   }
-  // console.log(series);
+  
 
   angleMode(DEGREES);
 
   for (let i = 0; i < series.length; i++) {
     series[i].generate();
   }
+
   noLoop();
   frameRate(1);
 }
@@ -39,12 +42,12 @@ function draw() {
 }
 
 function mousePressed() {
-  for (let j = 0; j < 2; j++) {
+  for (let j = 0; j < 1; j++) {
     series = [];
     setup();
     redraw();
     // save('canvas' + j + '.jpg');
-    console.log('canvas' + j + '.jpg');
+    //console.log('canvas' + j + '.jpg');
   }
 }
 
@@ -64,6 +67,7 @@ function Serie(x, y, angle, pal) {
   // console.log(c);
   this.color = color(c);
   this.color._array[3] = 100 / 255;
+
   this.generate = function() {
     for (let i = 0; i < 7; i++) {
       this.quadrati.push(new Quadrato(this.x, this.y, this.dimension / pow(3, i) * pow(2, i), this.color));
@@ -103,7 +107,7 @@ function Quadrato(x, y, dim, color) {
     strokeWeight(2);
     // ellipseMode(CORNER);
     // ellipse(0,0,this.dim);
-    rect(0, 0, this.dim, this.dim);
+	rect(0, 0, this.dim, this.dim);
   }
   //end function Quadrato
 }
