@@ -1,7 +1,9 @@
 ArrayList<Serie> series;
 
 boolean SAVE = false;
-int NUM_SAVE = 15;
+int NUM_SAVE = 1;
+
+boolean PAPER_ON = false;
 
 void setup() {
   int pal;
@@ -28,6 +30,13 @@ void draw() {
   stroke(127, 127, 127, 50);
   noFill();
   rect( width/20, height/20, width - width/10, height - height/10);
+
+  if (PAPER_ON) {
+    push();
+    paper(30);
+    pop();
+  }
+  
   if (SAVE) {
     if (frameCount%NUM_SAVE == 0) {
       exit();
@@ -47,6 +56,22 @@ void mousePressed() {
   }
 }
 
+
+void paper(int in_val) {
+  noStroke();
+  for (int i = 0; i<width-1; i+=(width/300)) {
+    for (int j = 0; j<height-1; j+=(height/300)) {
+      fill(random(85-10, 85+10), in_val);
+      rect(i, j, width/300, height/300);
+    }
+  }
+
+  for (int i = 0; i<width/20; i++) {
+    fill(random(40, 60), random(in_val*2.5, in_val*3));
+    rotate(random(TWO_PI));
+    rect(random(0, width-2), random(0, height-2), random(1, width/300 + 1), random(1, height/300 +1));
+  }
+}
 
 class Serie {
   float x, y;
